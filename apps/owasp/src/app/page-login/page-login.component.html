@@ -1,0 +1,43 @@
+<body>
+  <header>
+    <h1>Shared Notes Login</h1>
+  </header>
+
+  <main>
+    <section>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <!-- Grid -->
+        <div class="grid">
+      
+          <!-- Markup example 1: input is inside label -->
+          <label for="name">
+            Login name
+            <input type="text" id="name" name="name" placeholder="Username" formControlName="name" required>
+          </label>
+      
+          <label for="password">
+            Password
+            <input type="password" id="password" name="password" placeholder="Super secret password" formControlName="password" required>
+          </label>
+      
+        </div>
+      
+        <!-- Button -->
+        <button type="submit">Login</button>
+      
+      </form>
+    </section>
+  </main>
+  
+  <footer>
+    <nav>
+      <ul>
+        <li><strong>Infosec A4</strong></li>
+      </ul>
+      <ul>
+        <li><a href="https://owasp.org/www-project-top-ten/">OWASP TOP 10</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>

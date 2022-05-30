@@ -1,0 +1,9 @@
+<ng-container *ngIf="loggedIn; then AppPage else LoginPage"></ng-container>
+
+<ng-template #AppPage>
+  <infosec-page-app [user]="user" (logoutEvent)="logout()"></infosec-page-app>
+</ng-template>
+
+<ng-template #LoginPage>
+  <infosec-page-login (loginEvent)="login($event)"></infosec-page-login>
+</ng-template>

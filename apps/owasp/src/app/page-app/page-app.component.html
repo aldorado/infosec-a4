@@ -1,0 +1,36 @@
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><strong>Shared Notes</strong></li>
+      </ul>
+      <ul>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#" role="button">Create Note</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <h1>{{ user?.name }}'s Notes Feed</h1>
+    <section *ngFor="let message of messages">
+      <article>
+        {{ message.message }}
+        <footer>- createdby: {{ message.user }}</footer>
+      </article>
+    </section>
+
+  </main>
+  
+  <footer>
+    <nav>
+      <ul>
+        <li><strong>Shared Notes</strong></li>
+      </ul>
+      <ul>
+        <li><a href="#" (click)="logout()" role="button">Logout</a></li>
+      </ul>
+    </nav>
+    Infosec A4 2022
+  </footer>
+</body>
