@@ -6,16 +6,27 @@
       </ul>
       <ul>
         <li><a href="#">Profile</a></li>
-        <li><a href="#" role="button">Create Note</a></li>
+        <li><a href="#" role="button" (click)="sendMessage()">Create Note</a></li>
       </ul>
     </nav>
+    <section>
+      <input type="text" [(ngModel)]="newMessage">
+    </section>
   </header>
   
   <main>
-    <h1>{{ user?.name }}'s Notes Feed</h1>
+    <!-- <h1>Notes Feeds</h1> -->
+    <h2>Public Notes Feed</h2>
     <section *ngFor="let message of messages">
       <article>
-        {{ message.message }}
+        <span [innerHtml]="sanitizer.bypassSecurityTrustHtml(message.message)"></span>
+        <footer>- createdby: {{ message.user }}</footer>
+      </article>
+    </section>
+    <h2>{{ user?.name }}'s Notes Feed</h2>
+    <section *ngFor="let message of userMessages">
+      <article>
+        <span [innerHtml]="message.message"></span>
         <footer>- createdby: {{ message.user }}</footer>
       </article>
     </section>

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PageAppComponent } from './page-app/page-app.component';
 import { PageLoginComponent } from './page-login/page-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PageAppComponent,
     PageLoginComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, ReactiveFormsModule],
+  imports: [BrowserModule, HttpClientModule, ReactiveFormsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

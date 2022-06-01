@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { LoggedInUser, Message } from '@infosec/api-interfaces';
-import { firstValueFrom } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'infosec-page-app',
@@ -11,21 +12,47 @@ import { firstValueFrom } from 'rxjs';
 export class PageAppComponent implements OnInit {
   @Output() logoutEvent = new EventEmitter();
   @Input() user: LoggedInUser | undefined = undefined;
-  
+
   messages: Message[] = [];
-  constructor(private http: HttpClient) {}
-  
-
+  userMessages: Message[] = [];
+  newMessage = '';
+  constructor(private http: HttpClient, public sanitizer: DomSanitizer) {}
   ngOnInit() {
-    this.http.get<Message[]>('/api/messages').subscribe(data => {
-      this.messages = data;
-    });
-  };
+    this.getMessages();
+  }
 
-  
+  async getMessages() {
+    this.http
+      .get<Message[]>('/api/messages')
+      .pipe(first())
+      .subscribe((data) => {
+        this.messages = data;
+      });
+
+    this.http
+      .get<Message[]>('/api/user-messages')
+      .pipe(first())
+      .subscribe((data) => {
+        this.userMessages = data;
+      });
+  }
+
   async logout() {
-    const response = await firstValueFrom(this.http.post<boolean>('/api/logout', this.user));
-    if (response)
-      this.logoutEvent.emit();
+    const response = await firstValueFrom(
+      this.http.post<boolean>('/api/logout', this.user)
+    );
+    if (response) this.logoutEvent.emit();
+  }
+
+  async sendMessage() {
+    console.log('[SendMessage]', this.newMessage);
+    const response = await firstValueFrom(
+      this.http.post<boolean>('/api/message', {
+        message: this.newMessage,
+        user: this.user?.name,
+      })
+    );
+    if (response) this.newMessage = '';
+    this.getMessages();
   }
 }
