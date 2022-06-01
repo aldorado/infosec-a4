@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { LoggedInUser, Message, User } from '@infosec/api-interfaces';
 import { users, messages as defaultMessages } from './app.constants';
+import { nanoid } from 'nanoid';
 
 @Injectable()
 export class AuthService {
@@ -95,7 +96,8 @@ export class AppService {
   }
 
   createSessionId(): string {
-    return this._randomIntFromInterval(0, 10000).toString();
+    // return this._randomIntFromInterval(0, 10000).toString();
+    return nanoid().toString();
   }
 
   _randomIntFromInterval(min, max): number {

@@ -26,6 +26,7 @@
     "@nrwl/angular": "14.1.9",
     "@picocss/pico": "^1.5.2",
     "cookie-parser": "^1.4.6",
+    "nanoid": "^3.3.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
