@@ -33,6 +33,7 @@ export class AppController {
   @Post('message')
   postData(@Body() data: Message, @Req() request): Message {
     const sessionId = request.cookies['sessionId'];
+    console.log('[PostData]', { data, sessionId });
     return this.appService.postData(data, sessionId);
   }
 
@@ -42,7 +43,8 @@ export class AppController {
     @Res({ passthrough: true }) response
   ): LoggedInUser | null {
     const session = this.appService.login(user);
-    response.cookie('sessionId', session.sessionId);
+    // response.cookie('sessionId', session.sessionId);
+    response.cookie([`sessionId=${session.sessionId}; samesite=none`]);
     return session;
   }
 
