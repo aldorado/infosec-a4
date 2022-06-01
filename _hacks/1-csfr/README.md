@@ -7,3 +7,8 @@ Fix:
 Implement access control mechanisms once and re-use them throughout the application, including minimizing Cross-Origin Resource Sharing (CORS) usage.
 
 Durch falsch konfigurierte Cookies, lassen sich von aussen API routen mit dem session-cookie die der User auf seiner Maschine hat in dessen "Namen" ausführen
+
+login as victim
+cd \_hacks/1-csfr
+npx http-server
+click on csfr-haxxor.html

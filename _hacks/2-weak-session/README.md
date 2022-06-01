@@ -6,3 +6,7 @@ Durch eine schwache SessionId wird es dem Angreifer sehr leicht gemacht ein Skri
 Wenn noch dazu eine Route die session verifiziert und userdaten zurück gibt, wird das ganze nochmal leichter
 
 UUIDs als sessionIds verwenden, so das die bruteforce attacke nicht mehr möglich ist
+
+login as victim
+cd \_hacks/2-weak-session
+yarn run
