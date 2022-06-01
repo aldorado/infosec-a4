@@ -19,7 +19,7 @@
     <h2>Public Notes Feed</h2>
     <section *ngFor="let message of messages">
       <article>
-        <span [innerHtml]="sanitizer.bypassSecurityTrustHtml(message.message)"></span>
+        <span [innerHtml]="message.message"></span>
         <footer>- createdby: {{ message.user }}</footer>
       </article>
     </section>
