@@ -23,14 +23,14 @@ export class AppController {
   
   @Post('logout')
   logout(@Body() user: User, @Req() request): boolean | null{
-    console.log('cookies ==>', request.cookies['sessionId']);
     const sessionId = request.cookies['sessionId'];
     return this.appService.logout(sessionId);
   }
 
   @Post('session')
-  session(@Body() sessionRequest: { sessionId: string }): LoggedInUser | null {
-    const { sessionId } = sessionRequest;
+  session(@Body() sessionRequest: { sessionId: string }, @Req() request): LoggedInUser | null {
+    // const { sessionId } = sessionRequest;
+    const sessionId = request.cookies['sessionId'];
     return this.appService.checkSessionId(sessionId);
   }
 

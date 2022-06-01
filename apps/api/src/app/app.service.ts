@@ -1,11 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Request, Response, NextFunction } from 'express'; 
+
 import { LoggedInUser, Message, User } from '@infosec/api-interfaces';
 import { users } from './app.constants';
 
 @Injectable()
+export class AuthService {
+  sessions: LoggedInUser[] = [];
+}
+
+@Injectable()
 export class AppService {
 
-  sessionIds: string[] = [];
   sessions: LoggedInUser[] = [];
 
   getData(): Message[] {
@@ -69,5 +75,15 @@ export class AppService {
   
   _randomIntFromInterval(min, max): number { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+}
+
+@Injectable()
+export class CookieMiddleware implements NestMiddleware {
+  use(req: Request, res: Response, next: NextFunction) {
+    const sessionId = req.cookies['sessionId'];
+    console.log('[CookieMiddleware]', sessionId);
+    req.cookies
+    next();
   }
 }
