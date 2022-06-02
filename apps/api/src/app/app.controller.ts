@@ -44,7 +44,7 @@ export class AppController {
   ): LoggedInUser | null {
     const session = this.appService.login(user);
     // response.cookie('sessionId', session.sessionId);
-    response.cookie([`sessionId=${session.sessionId}; samesite=none`]);
+    response.cookie([`sessionId=${session.sessionId}; SameSite=none; secure;`]);
     return session;
   }
 
