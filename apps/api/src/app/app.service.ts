@@ -108,7 +108,13 @@ export class AppService {
 export class CookieMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const sessionId = req.cookies['sessionId'];
+    const origin = req.get('origin');
+    const host = req.get('host');
+    if (origin && origin !== 'http://localhost:4200') {
+      res.status(500).send('Error');
+    }
     console.log('[CookieMiddleware]', sessionId);
+    console.log('[CookieMiddleware]', { host, origin });
     req.cookies;
     next();
   }
